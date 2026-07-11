@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-evergreen;
+    letter-spacing: -0.01em;
+  }
+
+  /* Tabular, lining figures so rent prices align cleanly. */
+  .tnum {
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: 'tnum' 1, 'lnum' 1;
+  }
+
+  /* Consistent, visible focus ring on every interactive surface. */
+  :where(a, button, input, select, [tabindex]):focus-visible {
+    outline: 2px solid theme('colors.marigold.DEFAULT');
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-sans font-semibold
+           transition-colors duration-200 focus-visible:outline-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-marigold px-6 py-3 text-ink hover:bg-marigold-deep;
+  }
+
+  .btn-evergreen {
+    @apply btn bg-evergreen px-6 py-3 text-paper hover:bg-evergreen-light;
+  }
+
+  .btn-outline {
+    @apply btn border border-line bg-white px-5 py-2.5 text-evergreen hover:border-evergreen hover:text-evergreen-light;
+  }
+
+  .eyebrow {
+    @apply font-display text-sm font-semibold uppercase tracking-[0.18em] text-marigold-deep;
+  }
+
+  .icon-btn {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-200;
+  }
+}
