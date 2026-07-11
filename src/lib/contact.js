@@ -1,5 +1,5 @@
 // One place to swap in the real number later. Everything downstream derives from it.
-export const PHONE_E164 = '919876543210' // country code + number, digits only
+export const PHONE_E164 = '1234567891' // country code + number, digits only
 export const EMAIL = 'hello@rent2stay.in'
 export const ADDRESS = '3rd Floor, Neeladri Road, Electronic City Phase 1, Bengaluru 560100'
 
