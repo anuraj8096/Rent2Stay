@@ -7,27 +7,26 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="mt-20 bg-evergreen-deep text-paper">
-      <div className="wrap grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
-        {/* Blurb */}
+    <footer className="mt-auto border-t border-gray-100 bg-gray-50">
+      <div className="wrap grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:py-16">
+        {/* Brand */}
         <div className="lg:col-span-1">
-          <div className="flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-paper/10 text-paper">
-              <HomeIcon className="h-5 w-5" aria-hidden="true" />
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white">
+              <HomeIcon className="h-4.5 w-4.5" aria-hidden="true" />
             </span>
-            <span className="font-display text-lg font-bold">
-              Rent<span className="text-marigold">2</span>Stay
+            <span className="font-display text-xl font-bold text-gray-900">
+              Rent<span className="text-primary">2</span>Stay
             </span>
           </div>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-paper/70">
-            Zero-brokerage rental homes across south Bangalore. We list only what we've verified, and
-            we pick up the phone.
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-gray-500">
+            Zero-brokerage rental homes across Bangalore. We list only what we've verified, and we pick up the phone.
           </p>
         </div>
 
         {/* Localities */}
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-[0.16em] text-marigold">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
             Localities
           </h3>
           <ul className="mt-4 space-y-2.5">
@@ -35,7 +34,7 @@ export default function Footer() {
               <li key={a.slug}>
                 <Link
                   to={`/explore/${a.slug}`}
-                  className="text-sm text-paper/80 transition-colors hover:text-paper"
+                  className="text-sm text-gray-600 transition-colors hover:text-primary"
                 >
                   {a.name}
                 </Link>
@@ -46,19 +45,19 @@ export default function Footer() {
 
         {/* Contact */}
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-[0.16em] text-marigold">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
             Get in touch
           </h3>
-          <ul className="mt-4 space-y-3 text-sm text-paper/80">
+          <ul className="mt-4 space-y-3 text-sm text-gray-600">
             <li>
-              <a href={telHref} className="inline-flex items-center gap-2.5 hover:text-paper">
-                <Phone className="h-4 w-4 shrink-0 text-marigold" aria-hidden="true" />
+              <a href={telHref} className="inline-flex items-center gap-2.5 hover:text-primary">
+                <Phone className="h-4 w-4 shrink-0 text-gray-400" aria-hidden="true" />
                 <span className="tnum">{phoneDisplay}</span>
               </a>
             </li>
             <li>
-              <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2.5 hover:text-paper">
-                <Mail className="h-4 w-4 shrink-0 text-marigold" aria-hidden="true" />
+              <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2.5 hover:text-primary">
+                <Mail className="h-4 w-4 shrink-0 text-gray-400" aria-hidden="true" />
                 {EMAIL}
               </a>
             </li>
@@ -67,68 +66,68 @@ export default function Footer() {
                 href={whatsappHref()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 hover:text-paper"
+                className="inline-flex items-center gap-2.5 hover:text-primary"
               >
-                <MessageCircle className="h-4 w-4 shrink-0 text-marigold" aria-hidden="true" />
+                <MessageCircle className="h-4 w-4 shrink-0 text-gray-400" aria-hidden="true" />
                 WhatsApp us
               </a>
             </li>
             <li className="flex items-start gap-2.5">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-marigold" aria-hidden="true" />
-              <span className="text-paper/70">{ADDRESS}</span>
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gray-400" aria-hidden="true" />
+              <span className="text-gray-500">{ADDRESS}</span>
             </li>
           </ul>
         </div>
 
-        {/* Social + quick nav */}
+        {/* Social */}
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-[0.16em] text-marigold">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-400">
             Follow along
           </h3>
-          <div className="mt-4 flex gap-3">
+          <div className="mt-4 flex gap-2">
             <a
               href="https://www.instagram.com/rent2stays_management_banglore/"
               target="_blank"
               rel="noopener noreferrer"
-              className="icon-btn bg-paper/10 text-paper hover:bg-paper/20"
+              className="icon-btn h-10 w-10 border border-gray-200 bg-white text-gray-500 hover:border-gray-300 hover:text-primary"
               aria-label="Rent2Stay on Instagram"
             >
-              <Instagram className="h-5 w-5" aria-hidden="true" />
+              <Instagram className="h-4 w-4" aria-hidden="true" />
             </a>
             <a
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="icon-btn bg-paper/10 text-paper hover:bg-paper/20"
+              className="icon-btn h-10 w-10 border border-gray-200 bg-white text-gray-500 hover:border-gray-300 hover:text-primary"
               aria-label="Rent2Stay on Facebook"
             >
-              <Facebook className="h-5 w-5" aria-hidden="true" />
+              <Facebook className="h-4 w-4" aria-hidden="true" />
             </a>
             <a
               href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="icon-btn bg-paper/10 text-paper hover:bg-paper/20"
+              className="icon-btn h-10 w-10 border border-gray-200 bg-white text-gray-500 hover:border-gray-300 hover:text-primary"
               aria-label="Rent2Stay on X"
             >
-              <Twitter className="h-5 w-5" aria-hidden="true" />
+              <Twitter className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
-          <div className="mt-6 flex flex-col gap-2 text-sm text-paper/80">
-            <Link to="/explore" className="hover:text-paper">
+          <div className="mt-6 flex flex-col gap-2 text-sm text-gray-600">
+            <Link to="/explore" className="hover:text-primary">
               Explore all areas
             </Link>
-            <Link to="/about" className="hover:text-paper">
+            <Link to="/about" className="hover:text-primary">
               About Rent2Stay
             </Link>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-paper/10">
-        <div className="wrap flex flex-col items-center justify-between gap-2 py-6 text-xs text-paper/60 sm:flex-row">
-          <p>© {year} Rent2Stay. All rights reserved.</p>
-          <p>Made in Bengaluru · Listings updated regularly</p>
+      <div className="border-t border-gray-200">
+        <div className="wrap flex flex-col items-center justify-between gap-2 py-6 text-xs text-gray-400 sm:flex-row">
+          <p>&copy; {year} Rent2Stay. All rights reserved.</p>
+          <p>Made in Bengaluru</p>
         </div>
       </div>
     </footer>
