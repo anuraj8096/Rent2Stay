@@ -13,29 +13,28 @@ const BHK_OPTIONS = [
 
 const PRICE_OPTIONS = [
   { value: 'all', label: 'Any price' },
-  { value: 'under-15k', label: 'Under ₹15,000' },
-  { value: '15-25k', label: '₹15,000–₹25,000' },
-  { value: '25k-plus', label: '₹25,000+' },
+  { value: 'under-20k', label: 'Under ₹20k' },
+  { value: '20-30k', label: '₹20k–₹30k' },
+  { value: '30k-plus', label: '₹30k+' },
 ]
 
 function matchesPrice(rent, bucket) {
-  if (bucket === 'under-15k') return rent < 15000
-  if (bucket === '15-25k') return rent >= 15000 && rent <= 25000
-  if (bucket === '25k-plus') return rent > 25000
+  if (bucket === 'under-20k') return rent < 20000
+  if (bucket === '20-30k') return rent >= 20000 && rent <= 30000
+  if (bucket === '30k-plus') return rent > 30000
   return true
 }
 
-// Segmented control used for both filters.
-function Segmented({ label, options, value, onChange, name }) {
+function Segmented({ label, options, value, onChange }) {
   return (
     <div>
-      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-sand-600">
+      <span className="mb-1.5 block text-xs font-medium text-gray-400">
         {label}
       </span>
       <div
         role="radiogroup"
         aria-label={label}
-        className="inline-flex flex-wrap gap-1 rounded-full border border-line bg-white p-1"
+        className="inline-flex flex-wrap gap-1 rounded-full border border-gray-200 bg-gray-50 p-1"
       >
         {options.map((o) => {
           const active = value === o.value
@@ -47,10 +46,10 @@ function Segmented({ label, options, value, onChange, name }) {
               aria-checked={active}
               onClick={() => onChange(o.value)}
               className={[
-                'rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors',
+                'rounded-full px-3 py-1.5 text-xs font-medium transition-all sm:text-sm',
                 active
-                  ? 'bg-evergreen text-paper'
-                  : 'text-sand-600 hover:bg-sand-100 hover:text-evergreen',
+                  ? 'bg-primary text-white shadow-card'
+                  : 'text-gray-500 hover:bg-white hover:text-gray-900 hover:shadow-card',
               ].join(' ')}
             >
               {o.label}
@@ -66,13 +65,12 @@ function LocalityNotFound() {
   useDocumentTitle('Locality not found')
   return (
     <div className="wrap flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
-      <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-sand-100 text-evergreen">
+      <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-100 text-gray-400">
         <MapPinOff className="h-8 w-8" aria-hidden="true" />
       </span>
-      <h1 className="mt-6 font-display text-2xl font-bold">We don't cover that area yet</h1>
-      <p className="mt-3 max-w-md text-sand-600">
-        That locality isn't on our corridor. Take a look at the four areas we do cover — you'll
-        likely find something close by.
+      <h1 className="mt-6 font-display text-2xl font-bold text-gray-900">We don't cover that area yet</h1>
+      <p className="mt-3 max-w-md text-gray-500">
+        That locality isn't on our list yet. Take a look at the areas we do cover.
       </p>
       <Link to="/explore" className="btn-primary mt-8">
         Back to Explore
@@ -100,7 +98,6 @@ export default function Locality() {
 
   if (!area) return <LocalityNotFound />
 
-  // Write a filter into the URL query string so the view is shareable.
   const setFilter = (key, value) => {
     const next = new URLSearchParams(params)
     if (value === 'all') next.delete(key)
@@ -116,40 +113,38 @@ export default function Locality() {
   return (
     <div>
       {/* Header */}
-      <div className="border-b border-line bg-sand-50">
-        <div className="wrap py-8">
+      <div className="border-b border-gray-100 bg-gray-50">
+        <div className="wrap py-6 sm:py-8">
           <nav className="text-sm" aria-label="Breadcrumb">
             <Link
               to="/explore"
-              className="inline-flex items-center gap-1 text-sand-600 transition-colors hover:text-evergreen"
+              className="inline-flex items-center gap-1 text-gray-500 transition-colors hover:text-primary"
             >
               <ChevronLeft className="h-4 w-4" aria-hidden="true" />
               Explore
             </Link>
           </nav>
-          <h1 className="mt-2 font-display text-2xl font-bold sm:text-3xl">{area.name}</h1>
-          <p className="mt-2 max-w-2xl text-sand-600">{area.blurb}</p>
+          <h1 className="mt-2 font-display text-2xl font-bold text-gray-900 sm:text-3xl">{area.name}</h1>
+          <p className="mt-2 max-w-2xl text-sm text-gray-500 sm:text-base">{area.blurb}</p>
         </div>
       </div>
 
-      {/* Sticky filter bar */}
-      <div className="sticky top-16 z-20 border-b border-line bg-paper/95 backdrop-blur">
-        <div className="wrap flex flex-col gap-4 py-4 lg:flex-row lg:items-end lg:justify-between">
-          <div className="flex flex-wrap items-end gap-x-8 gap-y-4">
-            <span className="flex items-center gap-2 pb-1 font-display text-sm font-semibold text-evergreen">
-              <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
+      {/* Filter bar */}
+      <div className="sticky top-16 z-20 border-b border-gray-100 bg-white/95 backdrop-blur-md">
+        <div className="wrap flex flex-col gap-4 py-3 sm:py-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
+            <span className="flex items-center gap-2 pb-1 text-sm font-semibold text-gray-700">
+              <SlidersHorizontal className="h-4 w-4 text-gray-400" aria-hidden="true" />
               Filters
             </span>
             <Segmented
               label="Bedrooms"
-              name="bhk"
               options={BHK_OPTIONS}
               value={bhk}
               onChange={(v) => setFilter('bhk', v)}
             />
             <Segmented
               label="Monthly rent"
-              name="price"
               options={PRICE_OPTIONS}
               value={price}
               onChange={(v) => setFilter('price', v)}
@@ -157,17 +152,17 @@ export default function Locality() {
           </div>
 
           <div className="flex items-center justify-between gap-4">
-            <span aria-live="polite" className="tnum text-sm font-medium text-sand-600">
+            <span aria-live="polite" className="tnum text-sm text-gray-500">
               {results.length} {results.length === 1 ? 'home' : 'homes'}
             </span>
             {isFiltered && (
               <button
                 type="button"
                 onClick={clearFilters}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-marigold-deep hover:text-evergreen"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-light"
               >
-                <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                Clear filters
+                <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
+                Clear
               </button>
             )}
           </div>
@@ -175,7 +170,7 @@ export default function Locality() {
       </div>
 
       {/* Results */}
-      <div className="wrap py-10">
+      <div className="wrap py-8 sm:py-10">
         {results.length > 0 ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {results.map((p) => (
@@ -184,15 +179,15 @@ export default function Locality() {
           </div>
         ) : (
           <div className="mx-auto flex max-w-md flex-col items-center py-16 text-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-sand-100 text-evergreen">
+            <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-100 text-gray-400">
               <SearchX className="h-8 w-8" aria-hidden="true" />
             </span>
-            <h2 className="mt-6 font-display text-xl font-bold text-evergreen">
-              Nothing matches just yet
+            <h2 className="mt-6 font-display text-xl font-bold text-gray-900">
+              Nothing matches yet
             </h2>
-            <p className="mt-3 text-sand-600">
+            <p className="mt-3 text-gray-500">
               No {[bhkLabel, priceLabel !== 'any price' ? priceLabel : ''].filter(Boolean).join(' ')}{' '}
-              homes in {area.name} right now. Try widening the price range or clearing a filter.
+              homes in {area.name} right now. Try widening the filters.
             </p>
             <button type="button" onClick={clearFilters} className="btn-primary mt-8">
               <RotateCcw className="h-4 w-4" aria-hidden="true" />
