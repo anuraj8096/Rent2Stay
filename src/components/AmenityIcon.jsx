@@ -15,7 +15,6 @@ import {
   Check,
 } from 'lucide-react'
 
-// Maps an amenity label to a lucide icon. Anything unmapped falls back to a tick.
 const MAP = {
   Parking: Car,
   Furnished: Sofa,

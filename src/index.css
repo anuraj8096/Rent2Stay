@@ -26,7 +26,7 @@
   }
 
   body {
-    @apply bg-paper text-ink font-sans antialiased;
+    @apply bg-white text-gray-900 font-sans antialiased;
     text-rendering: optimizeLegibility;
   }
 
@@ -34,19 +34,17 @@
   h2,
   h3,
   h4 {
-    @apply font-display text-evergreen;
-    letter-spacing: -0.01em;
+    @apply font-display text-gray-900;
+    letter-spacing: -0.02em;
   }
 
-  /* Tabular, lining figures so rent prices align cleanly. */
   .tnum {
     font-variant-numeric: tabular-nums lining-nums;
     font-feature-settings: 'tnum' 1, 'lnum' 1;
   }
 
-  /* Consistent, visible focus ring on every interactive surface. */
   :where(a, button, input, select, [tabindex]):focus-visible {
-    outline: 2px solid theme('colors.marigold.DEFAULT');
+    outline: 2px solid theme('colors.primary.DEFAULT');
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -54,31 +52,61 @@
 
 @layer components {
   .wrap {
-    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
   }
 
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-full font-sans font-semibold
-           transition-colors duration-200 focus-visible:outline-none;
+           transition-all duration-200 focus-visible:outline-none text-sm;
   }
 
   .btn-primary {
-    @apply btn bg-marigold px-6 py-3 text-ink hover:bg-marigold-deep;
+    @apply btn bg-primary px-6 py-3 text-white hover:bg-primary-light active:scale-[0.98];
   }
 
-  .btn-evergreen {
-    @apply btn bg-evergreen px-6 py-3 text-paper hover:bg-evergreen-light;
+  .btn-accent {
+    @apply btn bg-accent px-6 py-3 text-gray-900 hover:bg-accent-dark active:scale-[0.98];
   }
 
   .btn-outline {
-    @apply btn border border-line bg-white px-5 py-2.5 text-evergreen hover:border-evergreen hover:text-evergreen-light;
+    @apply btn border border-gray-200 bg-white px-5 py-2.5 text-gray-700 hover:border-gray-300 hover:bg-gray-50 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn px-4 py-2.5 text-gray-600 hover:bg-gray-100 hover:text-gray-900;
   }
 
   .eyebrow {
-    @apply font-display text-sm font-semibold uppercase tracking-[0.18em] text-marigold-deep;
+    @apply font-display text-xs font-semibold uppercase tracking-[0.16em] text-primary;
   }
 
   .icon-btn {
-    @apply inline-flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-200;
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200;
+  }
+
+  .section-pad {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  @keyframes hero-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes hero-scale-in {
+    from { opacity: 0; transform: scale(0.96) translateY(20px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .hero-rise {
+    animation: hero-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .hero-rise-1 { animation-delay: 0s; }
+  .hero-rise-2 { animation-delay: 0.08s; }
+  .hero-rise-3 { animation-delay: 0.16s; }
+  .hero-rise-4 { animation-delay: 0.24s; }
+  .hero-rise-5 { animation-delay: 0.32s; }
+
+  .hero-scale-in {
+    animation: hero-scale-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
   }
 }
