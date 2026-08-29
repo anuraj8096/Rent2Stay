@@ -46,70 +46,73 @@ export default function Navbar() {
     ].join(' ')
 
   return (
-    <header className="sticky top-0 z-40 border-b border-gray-100 bg-white/95 backdrop-blur-md">
-      <nav className="wrap flex h-16 items-center justify-between gap-4">
-        <Wordmark />
+    <>
+      <header className="sticky top-0 z-40 border-b border-gray-100 bg-white/95 backdrop-blur-md">
+        <nav className="wrap flex h-16 items-center justify-between gap-4">
+          <Wordmark />
 
-        <div className="hidden items-center gap-8 md:flex">
-          {links.map((l) => (
-            <NavLink key={l.to} to={l.to} end={l.end} className={navLinkClass}>
-              {l.label}
-            </NavLink>
-          ))}
-        </div>
+          <div className="hidden items-center gap-8 md:flex">
+            {links.map((l) => (
+              <NavLink key={l.to} to={l.to} end={l.end} className={navLinkClass}>
+                {l.label}
+              </NavLink>
+            ))}
+          </div>
 
-        <div className="flex items-center gap-2">
-          <a
-            href={telHref}
-            className="hidden items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-gray-300 hover:bg-gray-50 lg:inline-flex"
-          >
-            <Phone className="h-3.5 w-3.5" aria-hidden="true" />
-            <span className="tnum">{phoneDisplay}</span>
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href={telHref}
+              className="hidden items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-gray-300 hover:bg-gray-50 lg:inline-flex"
+            >
+              <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+              <span className="tnum">{phoneDisplay}</span>
+            </a>
 
-          <a
-            href={whatsappHref()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn hidden bg-whatsapp px-4 py-2 text-sm font-semibold text-white hover:brightness-95 sm:inline-flex"
-          >
-            <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
-            WhatsApp
-          </a>
+            <a
+              href={whatsappHref()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn hidden bg-whatsapp px-4 py-2 text-sm font-semibold text-white hover:brightness-95 sm:inline-flex"
+            >
+              <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
+              WhatsApp
+            </a>
 
-          <a
-            href={telHref}
-            className="icon-btn h-10 w-10 bg-primary text-white hover:bg-primary-light sm:hidden"
-            aria-label={`Call Rent2Stay at ${phoneDisplay}`}
-          >
-            <Phone className="h-4 w-4" aria-hidden="true" />
-          </a>
+            <a
+              href={telHref}
+              className="icon-btn h-10 w-10 bg-primary text-white hover:bg-primary-light sm:hidden"
+              aria-label={`Call Rent2Stay at ${phoneDisplay}`}
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+            </a>
 
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            className="icon-btn h-10 w-10 text-gray-700 hover:bg-gray-100 md:hidden"
-            aria-label="Open menu"
-            aria-expanded={open}
-          >
-            <Menu className="h-5 w-5" aria-hidden="true" />
-          </button>
-        </div>
-      </nav>
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              className="icon-btn h-10 w-10 text-gray-700 hover:bg-gray-100 md:hidden"
+              aria-label="Open menu"
+              aria-expanded={open}
+            >
+              <Menu className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </div>
+        </nav>
+      </header>
 
-      {/* Mobile slide-in drawer */}
+      {/* Mobile drawer — rendered outside <header> so backdrop-filter doesn't trap fixed positioning */}
       <div
         className={`fixed inset-0 z-50 md:hidden ${open ? '' : 'pointer-events-none'}`}
         aria-hidden={!open}
       >
         <div
-          className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+          className={`absolute inset-0 transition-opacity duration-300 ${
             open ? 'opacity-100' : 'opacity-0'
           }`}
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
           onClick={() => setOpen(false)}
         />
         <div
-          className={`absolute right-0 top-0 flex h-full w-[280px] max-w-[85%] flex-col bg-white shadow-premium transition-transform duration-300 ease-out ${
+          className={`absolute right-0 top-0 flex h-full w-[280px] max-w-[85vw] flex-col overflow-hidden bg-white shadow-premium transition-transform duration-300 ease-out ${
             open ? 'translate-x-0' : 'translate-x-full'
           }`}
           role="dialog"
@@ -147,23 +150,23 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="mt-auto flex flex-col gap-3 border-t border-gray-100 p-4">
-            <a href={telHref} className="btn-outline w-full py-3">
-              <Phone className="h-4 w-4" aria-hidden="true" />
-              <span className="tnum">{phoneDisplay}</span>
+          <div className="mt-auto flex flex-col gap-3 border-t border-gray-100 p-4 overflow-hidden">
+            <a href={telHref} className="btn-outline w-full min-w-0 py-3">
+              <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+              <span className="tnum truncate">{phoneDisplay}</span>
             </a>
             <a
               href={whatsappHref()}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn w-full bg-whatsapp px-5 py-3 font-semibold text-white hover:brightness-95"
+              className="btn w-full min-w-0 bg-whatsapp px-5 py-3 font-semibold text-white hover:brightness-95"
             >
-              <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              Chat on WhatsApp
+              <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+              <span className="truncate">Chat on WhatsApp</span>
             </a>
           </div>
         </div>
       </div>
-    </header>
+    </>
   )
 }

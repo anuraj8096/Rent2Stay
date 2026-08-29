@@ -89,14 +89,22 @@ function DetailsModal({ property, onClose }) {
   )}/mo) at ${property.address}. Is it available?`
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4">
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4"
+      style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, width: '100%', height: '100%' }}
+    >
+      <div
+        className="absolute inset-0"
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
+        onClick={onClose}
+        aria-hidden="true"
+      />
       <div
         role="dialog"
         aria-modal="true"
         aria-label={`${property.title} details`}
-        className="relative flex max-h-[95vh] w-full max-w-lg animate-fade-up flex-col overflow-hidden rounded-t-2xl bg-white shadow-premium sm:max-h-[85vh] sm:rounded-2xl"
-        style={{ maxWidth: '100vw' }}
+        className="relative flex max-h-[95vh] w-full max-w-lg animate-fade-up flex-col rounded-t-2xl bg-white shadow-premium sm:max-h-[85vh] sm:rounded-2xl"
+        style={{ maxWidth: '100vw', overflow: 'hidden' }}
       >
         {/* Image gallery */}
         <div className="relative shrink-0">
@@ -192,19 +200,19 @@ function DetailsModal({ property, onClose }) {
           </ul>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 border-t border-gray-100 bg-gray-50 p-4">
-          <a href={telHref} className="btn-outline w-full py-3">
-            <Phone className="h-4 w-4" aria-hidden="true" />
-            Call now
+        <div className="grid grid-cols-2 gap-3 border-t border-gray-100 bg-gray-50 p-4" style={{ overflow: 'hidden' }}>
+          <a href={telHref} className="btn-outline min-w-0 w-full py-3">
+            <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span className="truncate">Call now</span>
           </a>
           <a
             href={whatsappHref(waMsg)}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn w-full bg-whatsapp px-5 py-3 font-semibold text-white hover:brightness-95"
+            className="btn min-w-0 w-full bg-whatsapp px-4 py-3 font-semibold text-white hover:brightness-95"
           >
-            <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            WhatsApp
+            <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span className="truncate">WhatsApp</span>
           </a>
         </div>
       </div>
