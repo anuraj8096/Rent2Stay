@@ -87,7 +87,7 @@ export default function Footer() {
           </h3>
           <div className="mt-4 flex gap-3">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/rent2stays_management_banglore/"
               target="_blank"
               rel="noopener noreferrer"
               className="icon-btn bg-paper/10 text-paper hover:bg-paper/20"
