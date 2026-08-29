@@ -96,7 +96,6 @@ function DetailsModal({ property, onClose }) {
         aria-modal="true"
         aria-label={`${property.title} details`}
         className="relative flex max-h-[95vh] w-full max-w-lg animate-fade-up flex-col overflow-hidden rounded-t-2xl bg-white shadow-premium sm:max-h-[85vh] sm:rounded-2xl"
-        style={{ maxWidth: '100vw' }}
       >
         {/* Image gallery */}
         <div className="relative shrink-0">
@@ -151,7 +150,7 @@ function DetailsModal({ property, onClose }) {
           )}
         </div>
 
-        <div className="flex-1 overflow-y-auto overflow-x-hidden p-5">
+        <div className="flex-1 overflow-y-auto p-5">
           <h3 className="font-display text-xl font-bold text-gray-900">{property.title}</h3>
           <p className="mt-1.5 flex items-start gap-1.5 text-sm text-gray-500">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
@@ -159,19 +158,19 @@ function DetailsModal({ property, onClose }) {
           </p>
 
           <div className="mt-4 grid grid-cols-2 gap-3">
-            <div className="min-w-0 rounded-xl bg-gray-50 p-3">
+            <div className="rounded-xl bg-gray-50 p-3">
               <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                <IndianRupee className="h-3 w-3 shrink-0" /> Rent
+                <IndianRupee className="h-3 w-3" /> Monthly Rent
               </div>
-              <p className="tnum mt-1 font-display text-lg font-bold text-gray-900 truncate">
+              <p className="tnum mt-1 font-display text-lg font-bold text-gray-900">
                 {formatRent(property.rent)}
               </p>
             </div>
-            <div className="min-w-0 rounded-xl bg-gray-50 p-3">
+            <div className="rounded-xl bg-gray-50 p-3">
               <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                <Shield className="h-3 w-3 shrink-0" /> Deposit
+                <Shield className="h-3 w-3" /> Security Deposit
               </div>
-              <p className="tnum mt-1 font-display text-lg font-bold text-gray-900 truncate">
+              <p className="tnum mt-1 font-display text-lg font-bold text-gray-900">
                 {property.deposit ? formatDeposit(property.deposit) : '—'}
               </p>
             </div>
@@ -182,11 +181,11 @@ function DetailsModal({ property, onClose }) {
           </h4>
           <ul className="mt-3 grid grid-cols-2 gap-2.5">
             {property.amenities.map((a) => (
-              <li key={a} className="flex min-w-0 items-center gap-2.5 text-sm text-gray-700">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-primary">
+              <li key={a} className="flex items-center gap-2.5 text-sm text-gray-700">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-50 text-primary">
                   <AmenityIcon name={a} />
                 </span>
-                <span className="truncate">{a}</span>
+                {a}
               </li>
             ))}
           </ul>
