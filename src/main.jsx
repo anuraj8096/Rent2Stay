@@ -5,7 +5,7 @@ import App from './App.jsx'
 import './index.css'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/Rent2Stay">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>,
